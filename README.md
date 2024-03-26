@@ -60,4 +60,15 @@ To create a new user with a username as admin with Admin role, we can run the fo
 airflow users create --username admin --password admin1 --firstname admin --lastname admin --role Admin --email anand_rj91@yahoo.co.in
 ```
 
-9. 
+_______
+
+9. Running of the Airflow Scheduler and Webserver
+Now we will start the airflow scheduler using the airflow scheduler command after activating the virtual environment:
+
+airflow scheduler
+Open a new terminal, activate the virtual environment, go to the airflow directory, and start the web server.
+username@desktop_name:~/airflow_workspace$ source airflow_env/bin/activate
+(airflow_env) username@desktop_name:~/airflow_workspace$ cd airflow
+(airflow_env) username@desktop_name:~/airflow_workspace/airflow$ airflow webserver
+Once the scheduler and webserver get initialized, open any browser and go to http://localhost:8080/.
+Port 8080 should be the default port for Airflow, and you see the following page:
