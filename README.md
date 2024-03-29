@@ -1,78 +1,64 @@
 # Apache-Airflow-Helm
 
-Reference - 
-
-- https://techontarget.blogspot.com/2023/06/apache-airflow-installation-on-ubuntu.html
-
-
-## Install Apache Airflow on Ubuntu 
-
-1. Installation of pip on Ubuntu
-To set up a virtual environment, we need to install a python package named virtualenv
+Install The Prerequsite Tools 
 
 ```
-sudo apt install python3-pip
+1. Install AWS CLI2 >> This is used to spin the EKS cluster on AWS cloud
+
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" 
+sudo apt install unzip
+unzip awscliv2.zip 
+sudo ./aws/install
+aws --version
+
+2. Install and Setup Kubectl >> This is used to interact with Kubernetes cluster
+
+curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl"
+chmod +x ./kubectl
+sudo mv ./kubectl /usr/local/bin
+kubectl version
+
+3. Install and Setup eksctl >> This is used to create and manage EKS cluster 
+
+curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
+sudo mv /tmp/eksctl /usr/local/bin
+eksctl version
+
+4. Install Helm chart
+
+curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+chmod 700 get_helm.sh
+./get_helm.sh
+
 
 ```
+_________________
 
-2. Installing & Setting Up a Virtual Environment
-After successfully installing pip, we will now install the virtualenv package using the following command:
-
-```
-sudo pip3 install virtualenv
+Configure AWS cli with the AWS-USER screate & Private key
 
 ```
+1. Sign in to the AWS Management Console: Sign in to the AWS Management Console using your AWS account credentials.
+2. Open the IAM Console: Navigate to the IAM (Identity and Access Management) console.
+3. Create IAM User:
+Click on "Users" in the left navigation pane.
+Click on "Add user".
+Enter a username for the IAM user.
+Select "Programmatic access" as the access type.
+4. Set Permissions:
+Attach policies that grant the necessary permissions for working with Amazon EKS. At a minimum, the user should have permissions to interact with EKS resources. You can either choose existing policies or create custom policies based on your requirements.
 
-3. To create a virtual environment directory as "airflow_env" inside the "airflow_workspace" directory, execute the following command:
+5. Create the User: Click on "Create user".
+6. Access Key Creation:
+After the user is created, you'll be presented with a success screen. Here, you can create an access key for the user.
+Click on "Create access key".
+Make sure to copy the Access Key ID and Secret Access Key as you will need them to configure the AWS CLI.
 
+7. Configure AWS CLI:
+
+Install the AWS CLI on your local machine if you haven't already.
+Configure the AWS CLI with the access key and secret access key of the IAM user you just 
 ```
-virtualenv airflow_env
-```
-
-4. To activate the environment use the following command:
-
-```
-source airflow_env/bin/activate
-```
-
-5. Next, we will install airflow and some additional libraries using the following command:
-
-```
-pip3 install apache-airflow[gcp,sentry,statsd]
-```
-
-6. Initialization of Airflow Database
-Now we will go to the airflow directory and initialize the airflow database using the following commands:
-
-```
-airflow db init
-```
-
-7. Airflow Directory after the 'airflow db init' command
-It is time to create a dags folder. All the future dags will be stored here and accessed by the airflow components.
-
-```
-mkdir dags
-```
-
-8. Creating a New Airflow User
-To create a new user with a username as admin with Admin role, we can run the following code:
-
-```
-airflow users create --username admin --password admin1 --firstname admin --lastname admin --role Admin --email anand_rj91@yahoo.co.in
-```
-
-9. Running of the Airflow Scheduler and Webserver
-Now we will start the airflow scheduler using the airflow scheduler command after activating the virtual environment:
-
-airflow scheduler
-Open a new terminal, activate the virtual environment, go to the airflow directory, and start the web server.
-username@desktop_name:~/airflow_workspace$ source airflow_env/bin/activate
-(airflow_env) username@desktop_name:~/airflow_workspace$ cd airflow
-(airflow_env) username@desktop_name:~/airflow_workspace/airflow$ airflow webserver
-Once the scheduler and webserver get initialized, open any browser and go to http://localhost:8080/.
-Port 8080 should be the default port for Airflow, and you see the following page:
 
 Output - 
 
-![image](https://github.com/anand40090/Apache-Airflow-Helm/assets/32446706/66161499-2e0f-441a-a6e4-fe30a2cad7f7)
+![image](https://github.com/anand40090/Apache-Airflow-Helm/assets/32446706/ab782798-771f-4bd7-9fc6-dcdd875bfe25)
