@@ -112,8 +112,21 @@ helm upgrade --install airflow apache-airflow/airflow --namespace airflow --crea
 
 Output -
 
-![image](https://github.com/anand40090/Apache-Airflow-Helm/assets/32446706/ce275bfa-1885-4c0f-a8dd-737d6e4622ac)
+![image](https://github.com/anand40090/Apache-Airflow-Helm/assets/32446706/9f8e46d3-2b8b-4aad-ad94-59a91449fcf5)
 
-![image](https://github.com/anand40090/Apache-Airflow-Helm/assets/32446706/77f51b1d-bce1-4341-977e-11d7cd2959dc)
+![image](https://github.com/anand40090/Apache-Airflow-Helm/assets/32446706/8c87e492-f5c5-4b60-9c01-afbd08261971)
+
+
+____________________________________
+
+Now, you can access Airflow UI by using kubectl port-forward:
+
+```
+kubectl port-forward svc/airflow-webserver 8080:8080 -n airflow
+```
+
+Output -
+
+![image](https://github.com/anand40090/Apache-Airflow-Helm/assets/32446706/ab0d4520-8f49-4ee5-8034-f2ccd2f768b1)
 
 
