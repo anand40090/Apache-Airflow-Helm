@@ -1,6 +1,6 @@
 # Apache-Airflow installation on Ubuntu OS with Helm Chart
 
-1. Install The Prerequsite Tools 
+1. Install The Prerequsite Tools on Ubuntu EC2 instance 
 
 ```
 1. Install AWS CLI2 >> This is used to spin the EKS cluster on AWS cloud
@@ -71,7 +71,7 @@ As we have already installed and configured AWS-CLI and eksctl, now we can creat
 
 Run below mentioned command to create EKS cluster, it will take 15 minutes to create and spin the cluster
 
-eksctl create cluster --name eks2 --version 1.24 --region ap-south-1 --nodegroup-name worker-nodes --node-type t2.large --nodes 2 --nodes-min 2 --nodes-max 3
+eksctl create cluster --name eks2 --version 1.26 --region ap-south-1 --nodegroup-name worker-nodes --node-type t2.large --nodes 2 --nodes-min 2 --nodes-max 3
 aws eks update-kubeconfig --name eks4
 
 
@@ -86,7 +86,7 @@ Output -
 
 4. Install Apache Airflow using Helm Chart
 
-````
+```
 1. Create values.yaml file with "KubernetesExecutor" executor to support EKS cluster
 
 executor: "KubernetesExecutor"
@@ -106,18 +106,20 @@ helm repo add apache-airflow https://airflow.apache.org
 ## This will add the apache-airflow helm chart repository
 
 helm upgrade --install airflow apache-airflow/airflow --namespace airflow --create-namespace -f values.yaml
-## This will install the apache-airflow using helmchart with description mentioned in the values.yaml file and it will create kubernetes namespace airflow 
+## This will install the apache-airflow using helmchart with description mentioned in the values.yaml file and it will create kubernetes namespace airflow
 
------
+```
 
 Output -
 
-![image](https://github.com/anand40090/Apache-Airflow-Helm/assets/32446706/9f8e46d3-2b8b-4aad-ad94-59a91449fcf5)
-
-![image](https://github.com/anand40090/Apache-Airflow-Helm/assets/32446706/8c87e492-f5c5-4b60-9c01-afbd08261971)
+![image](https://github.com/anand40090/Apache-Airflow-Helm/assets/32446706/0e9090f6-261e-49dc-b900-de13a5a6a834)
 
 
-____________________________________
+![image](https://github.com/anand40090/Apache-Airflow-Helm/assets/32446706/48df1816-c033-452f-8e72-4f99ee36f5cf)
+
+
+
+----
 
 Now, you can access Airflow UI by using kubectl port-forward:
 
@@ -128,5 +130,4 @@ kubectl port-forward svc/airflow-webserver 8080:8080 -n airflow
 Output -
 
 ![image](https://github.com/anand40090/Apache-Airflow-Helm/assets/32446706/ab0d4520-8f49-4ee5-8034-f2ccd2f768b1)
-
 
