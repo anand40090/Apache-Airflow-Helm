@@ -62,3 +62,19 @@ Configure the AWS CLI with the access key and secret access key of the IAM user 
 Output - 
 
 ![image](https://github.com/anand40090/Apache-Airflow-Helm/assets/32446706/ab782798-771f-4bd7-9fc6-dcdd875bfe25)
+
+_____
+
+Create EKS cluster for this Lab 
+
+```
+As we have already installed and configured AWS-CLI and eksctl, now we can create EKS cluster from the aws EC2 system
+
+Run below mentioned command to create EKS cluster, it will take 15 minutes to create and spin the cluster
+
+eksctl create cluster --name eks2 --version 1.24 --region ap-south-1 --nodegroup-name worker-nodes --node-type t2.large --nodes 2 --nodes-min 2 --nodes-max 3
+aws eks update-kubeconfig --name eks4
+
+
+
+```
