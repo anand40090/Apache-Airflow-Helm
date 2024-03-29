@@ -1,0 +1,9 @@
+executor: "KubernetesExecutor"
+scheduler:
+  extraVolumes:
+    - name: dags
+      hostPath:
+        path: /home/admin1/Airflow/Dag           ##This is the local path of your system where DAG files are stored
+  extraVolumeMounts:
+    - name: dags
+      mountPath: /home/admin1/Airflow/Dag        ##This is the local path of your system where DAG files are stored 
