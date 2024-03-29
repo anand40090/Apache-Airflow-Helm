@@ -1,4 +1,4 @@
-# Apache-Airflow-Helm on Ubuntu 
+# Apache-Airflow installation on Ubuntu OS with Helm Chart
 
 1. Install The Prerequsite Tools 
 
@@ -87,8 +87,33 @@ Output -
 4. Install Apache Airflow using Helm Chart
 
 ````
+1. Create values.yaml file with "KubernetesExecutor" executor to support EKS cluster
 
+executor: "KubernetesExecutor"
+scheduler:
+  extraVolumes:
+    - name: dags
+      hostPath:
+        path: /home/admin1/Airflow/Dag           ##This is the local path of your system where DAG files are stored
+  extraVolumeMounts:
+    - name: dags
+      mountPath: /home/admin1/Airflow/Dag        ##This is the local path of your system where DAG files are stored 
+
+
+2. Installing the Chart
+
+helm repo add apache-airflow https://airflow.apache.org
+## This will add the apache-airflow helm chart repository
+
+helm upgrade --install airflow apache-airflow/airflow --namespace airflow --create-namespace -f values.yaml
+## This will install the apache-airflow using helmchart with description mentioned in the values.yaml file and it will create kubernetes namespace airflow 
 
 -----
 
-4. 
+Output -
+
+![image](https://github.com/anand40090/Apache-Airflow-Helm/assets/32446706/ce275bfa-1885-4c0f-a8dd-737d6e4622ac)
+
+![image](https://github.com/anand40090/Apache-Airflow-Helm/assets/32446706/77f51b1d-bce1-4341-977e-11d7cd2959dc)
+
+
