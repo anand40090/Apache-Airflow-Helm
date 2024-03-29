@@ -33,7 +33,7 @@ chmod 700 get_helm.sh
 ```
 _________________
 
-2. Configure AWS cli with the AWS-USER screate & Private key
+2. Configure AWS cli with the AWS-USER Secrete & Private key
 
 ```
 1. Sign in to the AWS Management Console: Sign in to the AWS Management Console using your AWS account credentials.
