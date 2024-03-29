@@ -1,6 +1,6 @@
-# Apache-Airflow-Helm
+# Apache-Airflow-Helm on Ubuntu 
 
-Install The Prerequsite Tools 
+1. Install The Prerequsite Tools 
 
 ```
 1. Install AWS CLI2 >> This is used to spin the EKS cluster on AWS cloud
@@ -24,17 +24,16 @@ curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/d
 sudo mv /tmp/eksctl /usr/local/bin
 eksctl version
 
-4. Install Helm chart
+4. Install Helm chart and Airflow helm repository
 
 curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
 chmod 700 get_helm.sh
 ./get_helm.sh
 
-
 ```
 _________________
 
-Configure AWS cli with the AWS-USER screate & Private key
+2. Configure AWS cli with the AWS-USER screate & Private key
 
 ```
 1. Sign in to the AWS Management Console: Sign in to the AWS Management Console using your AWS account credentials.
@@ -65,7 +64,7 @@ Output -
 
 _____
 
-Create EKS cluster for this Lab 
+3. Create EKS cluster for this Lab 
 
 ```
 As we have already installed and configured AWS-CLI and eksctl, now we can create EKS cluster from the aws EC2 system
@@ -78,3 +77,18 @@ aws eks update-kubeconfig --name eks4
 
 
 ```
+
+Output - 
+
+![image](https://github.com/anand40090/Apache-Airflow-Helm/assets/32446706/4f809a9c-544e-46ab-86fc-40dac3906128)
+
+--------
+
+4. Install Apache Airflow using Helm Chart
+
+````
+
+
+-----
+
+4. 
